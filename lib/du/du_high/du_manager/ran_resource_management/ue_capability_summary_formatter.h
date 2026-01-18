@@ -79,6 +79,7 @@ struct formatter<srsran::srs_du::ue_capability_summary> {
   auto format(const srsran::srs_du::ue_capability_summary& params, FormatContext& ctx) const
   {
     helper.format_always(ctx, "pdsch_qam256_supported={}", params.pdsch_qam256_supported);
+    helper.format_always(ctx, "pdsch_qam1024_supported={}", params.pdsch_qam1024_supported);
     helper.format_always(ctx, "pdsch_qam64lowse_supported={}", params.pdsch_qam64lowse_supported);
     helper.format_always(ctx, "pusch_qam64lowse_supported={}", params.pusch_qam64lowse_supported);
     for (const auto& band : params.bands) {

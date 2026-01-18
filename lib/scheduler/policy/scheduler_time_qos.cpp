@@ -182,9 +182,11 @@ static double compute_dl_qos_weights(const slice_ue&                  u,
       }
 
       // GBR flow.
-      double dl_avg_rate = u.dl_avg_bit_rate(lc->lcid);
+      const auto& gbr_info    = lc->qos->gbr_qos_info.value();
+      const double gbr_dl_rate = std::min<double>(gbr_info.gbr_dl, gbr_info.max_br_dl);
+      double       dl_avg_rate = u.dl_avg_bit_rate(lc->lcid);
       if (dl_avg_rate != 0) {
-        gbr_weight += std::min(lc->qos->gbr_qos_info->gbr_dl / dl_avg_rate, max_metric_weight);
+        gbr_weight += std::min(gbr_dl_rate / dl_avg_rate, max_metric_weight);
       } else {
         gbr_weight += max_metric_weight;
       }
@@ -239,10 +241,12 @@ static double compute_ul_qos_weights(const slice_ue&                  u,
       }
 
       // GBR flow.
-      lcg_id_t lcg_id  = u.get_lcg_id(lc->lcid);
-      double   ul_rate = u.ul_avg_bit_rate(lcg_id);
+      const auto& gbr_info    = lc->qos->gbr_qos_info.value();
+      const double gbr_ul_rate = std::min<double>(gbr_info.gbr_ul, gbr_info.max_br_ul);
+      lcg_id_t     lcg_id      = u.get_lcg_id(lc->lcid);
+      double       ul_rate     = u.ul_avg_bit_rate(lcg_id);
       if (ul_rate != 0) {
-        gbr_weight += std::min(lc->qos->gbr_qos_info->gbr_ul / ul_rate, max_metric_weight);
+        gbr_weight += std::min(gbr_ul_rate / ul_rate, max_metric_weight);
       } else {
         gbr_weight = max_metric_weight;
       }

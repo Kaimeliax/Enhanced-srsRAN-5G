@@ -22,6 +22,7 @@
 
 #include "srsran/mac/config/mac_config_helpers.h"
 #include "srsran/du/du_cell_config_helpers.h"
+#include <algorithm>
 
 using namespace srsran;
 
@@ -104,7 +105,7 @@ mac_lc_config srsran::make_gbr_drb_mac_lc_config(const gbr_qos_flow_information&
   // [Implementation-Defined] Setting LCG ID other than the one assigned to non-GBR DRBs.
   mac_cfg.lcg_id = uint_to_lcg_id(1);
   // Set PBR based on the given GBR QoS flow information.
-  mac_cfg.pbr = get_pbr_ceil(gbr_qos_flow_info.gbr_ul);
+  mac_cfg.pbr = get_pbr_ceil(std::min(gbr_qos_flow_info.gbr_ul, gbr_qos_flow_info.max_br_ul));
   return mac_cfg;
 }
 
