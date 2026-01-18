@@ -56,6 +56,9 @@ srsran::srs_du::decode_ue_nr_cap_container(const byte_buffer& ue_cap_container)
     // Create and convert band capability.
     ue_capability_summary::supported_band band_cap;
     band_cap.pusch_qam256_supported = band.pusch_256_qam_present;
+    ue_caps.pdsch_qam1024_supported =
+        ue_caps.pdsch_qam1024_supported || band.pdsch_1024_qam_fr1_r17_present ||
+        band.pdsch_1024_qam_2_mimo_fr1_r17_present;
 
     // Emplace the band capability in the map.
     ue_caps.bands.emplace(static_cast<nr_band>(band.band_nr), band_cap);

@@ -44,8 +44,10 @@ static logical_channel_config::qos_info make_qos(qos_prio_level_t          qos_p
 
   if (dl_gbr != 0 and ul_gbr != 0) {
     qos.gbr_qos_info.emplace();
-    qos.gbr_qos_info.value().gbr_dl = dl_gbr;
-    qos.gbr_qos_info.value().gbr_ul = dl_gbr;
+    qos.gbr_qos_info.value().max_br_dl = dl_gbr;
+    qos.gbr_qos_info.value().max_br_ul = ul_gbr;
+    qos.gbr_qos_info.value().gbr_dl    = dl_gbr;
+    qos.gbr_qos_info.value().gbr_ul    = ul_gbr;
   }
   qos.arp_priority = arp_prio;
 

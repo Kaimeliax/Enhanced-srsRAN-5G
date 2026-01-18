@@ -82,6 +82,8 @@ struct ue_capability_summary {
 
   /// Set to true if QAM-256 MCS table are supported for PDSCH transmissions.
   bool pdsch_qam256_supported = false;
+  /// Set to true if QAM-1024 MCS table are supported for PDSCH transmissions.
+  bool pdsch_qam1024_supported = false;
   /// Set to true if QAM-64 LowSe MCS table are supported for PDSCH transmissions.
   bool pdsch_qam64lowse_supported = false;
   /// Set to true if QAM-64 LowSe MCS table are supported for PUSCH transmissions.
@@ -105,6 +107,7 @@ struct ue_capability_summary {
   bool operator==(const ue_capability_summary& other) const
   {
     if ((pdsch_qam256_supported != other.pdsch_qam256_supported) ||
+        (pdsch_qam1024_supported != other.pdsch_qam1024_supported) ||
         (pdsch_qam64lowse_supported != other.pdsch_qam64lowse_supported) ||
         (pusch_qam64lowse_supported != other.pusch_qam64lowse_supported) || (bands != other.bands) ||
         (long_drx_cycle_supported != other.long_drx_cycle_supported) ||
