@@ -31,6 +31,19 @@ cell_cfg:
   plmn: "00101"
   tac: 7
   pci: 1
+  sib:
+    si_window_length: 160
+    si_sched_info:
+      - si_period: 32
+        sib_mapping: [6]
+      - si_period: 32
+        sib_mapping: [7]
+      - si_period: 32
+        sib_mapping: [8]
+    etws:
+      warning_message: "ETWS test warning"
+    cmas:
+      warning_message: "CMAS test warning"
 
 log:
   filename: /tmp/gnb.log
